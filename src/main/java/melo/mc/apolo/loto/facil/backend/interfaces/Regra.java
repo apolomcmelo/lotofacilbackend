@@ -3,6 +3,7 @@ package melo.mc.apolo.loto.facil.backend.interfaces;
 import melo.mc.apolo.loto.facil.backend.model.Jogo;
 
 
+
 /**
  * Interface para regras que validam a sequência de jogos
  * 
@@ -10,6 +11,7 @@ import melo.mc.apolo.loto.facil.backend.model.Jogo;
  * @author Apolo Mc Melo
  */
 public interface Regra {	
+	
 	/**
 	 * Verifica se a sequência de números do jogo é valida de acordo com a regra estipulada
 	 * @param jogo

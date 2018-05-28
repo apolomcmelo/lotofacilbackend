@@ -6,22 +6,23 @@ import java.util.List;
 import melo.mc.apolo.loto.facil.backend.dtos.RegraDTO;
 import melo.mc.apolo.loto.facil.backend.enums.RegraEnum;
 import melo.mc.apolo.loto.facil.backend.interfaces.Regra;
-import melo.mc.apolo.loto.facil.backend.regras.RegraParesImpares;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class RegraConverter {
 
-	public List<RegraDTO> converterModelToDTO(List<Regra> regras) {
+	public List<RegraDTO> converterModelToDTO(RegraEnum[] regras) {
 		List<RegraDTO> dtos = new ArrayList<RegraDTO>();
 		if(regras != null){
-			for(int i=0; i<regras.size(); i++) {
-				Regra regra = regras.get(i);
+			for(int i=0; i<regras.length; i++) {
+				RegraEnum regra = regras[i];
+				
 				RegraDTO dto = new RegraDTO();
 				
-				if(regra instanceof RegraParesImpares) {
-					dto.setNome(RegraEnum.REGRA_PARES_IMPARES.getNome());
-					dto.setDescricao(RegraEnum.REGRA_PARES_IMPARES.getDescricao());
-					dto.setAtiva(true);
-				}
+				dto.setNome(regra.getNome());
+				dto.setDescricao(regra.getDescricao());
+				dto.setAtiva(true);
 				
 				dtos.add(dto);
 			}
@@ -37,10 +38,7 @@ public class RegraConverter {
 				RegraDTO dto = dtos.get(i);
 				
 				if(converterTodas || dto.isAtiva()) {
-					
-					if(RegraEnum.REGRA_PARES_IMPARES.getNome().equals(dto.getNome())) {
-						regras.add(RegraEnum.REGRA_PARES_IMPARES.getRegra());
-					}
+					regras.add(RegraEnum.nomeToEnum(dto.getNome()).getRegra());
 				}
 			}
 		}
